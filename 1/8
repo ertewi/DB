@@ -1,0 +1,2 @@
+update ord
+set ord_date = '2025-09-01 Asia/Novosibirsk'

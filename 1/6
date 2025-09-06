@@ -1,0 +1,2 @@
+delete from sal
+where snum = 3007

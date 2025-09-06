@@ -1,0 +1,22 @@
+version: '1.0'
+
+services:
+  db:
+    image: postgres:17.6-alpine3.21
+    environment:
+      - POSTGRES_DB=my_db
+      - POSTGRES_USER=test-platform
+      - POSTGRES_PASSWORD=!ChangeMe!
+    volumes:
+      - db-data:/var/lib/postgresql/data:rw
+    ports:
+      - "127.0.0.1:5432:5432"
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+volumes:
+  db-data: {}

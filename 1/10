@@ -1,0 +1,29 @@
+select * from ord
+where cnum = 2002
+
+select cnum, city, name, rating from cust
+where rating >= 200
+
+select pnum from ord
+where cnum <= 2005
+group by pnum
+order by pnum
+
+select * from cust
+where rating < 200
+and city in ('Novosibirsk', 'Saint Petersburg')
+
+select * from ord
+where cnum in (2004, 2005, 2006)
+
+select * from ord
+where cnum between 2004 and 2006
+
+select * from ord
+where cnum >= 2004
+and cnum <= 2006
+
+select * from ord
+where cnum = 2004
+or cnum = 2005
+or cnum = 2006

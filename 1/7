@@ -1,0 +1,2 @@
+alter table ord
+add column if not exists ord_date date
