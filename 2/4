@@ -1,0 +1,2 @@
+select concat(lower(name), ': ', rating, ' scores') from cust
+where name like '%ev%'

@@ -1,0 +1,6 @@
+select
+    to_char(ord_date, 'dd') as day,
+    to_char(ord_date, 'mm') as month,
+    to_char(ord_date, 'yy') as year
+from ord
+group by ord_date

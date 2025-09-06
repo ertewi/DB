@@ -1,0 +1,3 @@
+select substring(lower(name) from 2) from sal
+where length(name) > 5
+order by substring(lower(name) from 2)

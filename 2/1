@@ -1,0 +1,2 @@
+select name from prod
+where name ilike 's%s'

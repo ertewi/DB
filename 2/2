@@ -1,0 +1,3 @@
+select city from cust
+where city like '%r_'
+order by city
