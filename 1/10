@@ -4,9 +4,8 @@ where cnum = 2002
 select cnum, city, name, rating from cust
 where rating >= 200
 
-select pnum from ord
+select DISTINCT pnum from ord
 where cnum <= 2005
-group by pnum
 order by pnum
 
 select * from cust

@@ -1,3 +1,5 @@
+Вывести, сколько дней осталось от даты выполнения лабораторной до нового года.
+
 select extract(
     epoch
     from age('2026-01-01 00:00:00 Asia/Novosibirsk', '2025-09-06 Asia/Novosibirsk')

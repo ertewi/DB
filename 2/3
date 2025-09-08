@@ -1,3 +1,6 @@
+Вывести в нижнем регистре все имена из таблицы продавцов, имеющие длину более 5 символов.
+Первая буква в каждом названии должна быть удалена, а строки выведены в алфавитном порядке.
+
 select substring(lower(name) from 2) from sal
 where length(name) > 5
 order by substring(lower(name) from 2)

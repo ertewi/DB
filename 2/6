@@ -1,6 +1,8 @@
-select
+Вывести для каждой уникальной даты заказа запись. состоящую из трех столбцов: день в формате «dd»,
+ месяц в формате «mm», год в формате «yy».
+
+select distinct
     to_char(ord_date, 'dd') as day,
     to_char(ord_date, 'mm') as month,
     to_char(ord_date, 'yy') as year
 from ord
-group by ord_date
