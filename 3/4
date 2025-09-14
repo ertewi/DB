@@ -1,0 +1,6 @@
+Вывести число уникальных продуктов, которые продавались продавцами
+с номерами 3001-3004.
+
+select snum, count(distinct pnum) from ord
+where snum between 3001 and 3004
+group by snum

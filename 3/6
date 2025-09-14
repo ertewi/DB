@@ -1,0 +1,6 @@
+Вывести количество заказов для всех уникальных пар продукт-покупатель,
+между которыми осуществлялись заказы.
+
+select pnum, snum, count(*) from ord
+group by pnum, snum
+order by pnum, snum
