@@ -1,0 +1,9 @@
+Выбрать продавцов, которые продавали продукты с номером 1001
+для покупателей, которые когда-либо покупали продукт с номером 1005.
+
+select distinct snum from ord
+where pnum = 1001
+and cnum in (
+    select distinct cnum from ord
+    where pnum = 1005
+    )

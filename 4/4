@@ -1,0 +1,11 @@
+Вывести названия всех товаров, которые никогда не продавали
+продавцы из Москвы.
+
+select prod.name from prod
+where prod.pnum in (
+    select distinct ord.pnum from ord
+    where ord.snum not in (
+        select distinct sal.snum from sal
+        where sal.city = 'Moscow'
+    )
+)

@@ -1,0 +1,8 @@
+Вывести покупателей, рейтинг которых не меньше.
+чем рейтинг хотя бы одного покупателя из Москвы.
+
+select * from cust
+where rating >= (
+    select max(rating) from cust
+    where city = 'Moscow'
+    )

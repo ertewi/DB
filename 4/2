@@ -1,0 +1,9 @@
+Вывести общее количество купленных товаров для каждого покупателя,
+у которого это количество не больше, чем у покупателя с номером 2003.
+
+select cnum, count(*) from ord
+group by cnum
+having count(*) <= (
+    select count(*) from ord
+    where cnum = 2003
+    )

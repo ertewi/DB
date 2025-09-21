@@ -1,0 +1,18 @@
+select sal.name, sal.snum, (
+    select count(*) from ord
+    where ord.snum = sal.snum
+    and ord_date > '2025-09-20'
+ )
+from sal
+where (
+          select count(*) from ord
+          where ord.snum = sal.snum
+          and ord_date > '2025-09-20'
+      ) = 0;
+
+
+select name from sal
+where snum not in (
+    select snum from ord
+    where ord_date > '2025-09-20'
+)
