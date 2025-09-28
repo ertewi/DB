@@ -1,0 +1,10 @@
+Вывести имена всех продавцов, которые продавали товары,
+которые участвовали в более чем 5 заказах.
+
+select distinct sal.name from ord
+join sal on ord.snum = sal.snum
+where pnum in (
+    select pnum from ord
+    group by pnum
+    having count(*) > 5
+)

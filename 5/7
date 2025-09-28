@@ -1,0 +1,8 @@
+Вывести список городов, в которых живут и продавцы,
+и покупатели, но не производятся продукты.
+
+select sal.city from sal
+intersect
+select cust.city from cust
+except
+select prod.city from prod

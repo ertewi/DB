@@ -1,0 +1,5 @@
+Вывести все уникальные пары номеров продукты и покупателей, находящихся в одном городе.
+
+select * from prod
+cross join cust
+where prod.city = cust.city

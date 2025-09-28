@@ -1,0 +1,9 @@
+Вывести список имен всех продавцов.
+Для продавцов с комиссионными менее 0.15 присоединить
+объем минимального заказа этого продавца.
+
+select sal.name, min(ord.amt) from sal
+left join ord
+    on sal.snum = ord.snum
+    and sal.comm < 0.15
+group by sal.snum

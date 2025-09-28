@@ -1,0 +1,7 @@
+Напишите запрос, который выведет номер и объем заказа,
+имя и город покупателя только для заказов, покупатель которых не из Москвы.
+
+select ord.onum, ord.amt, cust.name, cust.city from ord
+join cust
+    on ord.cnum = cust.cnum
+    and cust.city != 'Moscow'

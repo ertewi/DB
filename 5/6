@@ -1,0 +1,6 @@
+Выведете полный список последних букв,
+которыми заканчиваются имена и/или города покупателей.
+
+select substring(cust.name from '.$') from cust
+union all
+select substring(cust.city from '.$') from cust
