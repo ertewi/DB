@@ -1,0 +1,9 @@
+# Создать индекс для ускорения сортировки таблицы покупателей по городу.
+# Проверьте, используется ли созданный индекс при сортировке.
+
+CREATE INDEX cust_city ON cust(city)
+
+EXPLAIN ANALYZE
+SELECT * FROM cust
+where city in ('Moscow', 'Novosibirsk')
+ORDER BY city

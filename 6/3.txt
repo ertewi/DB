@@ -1,0 +1,11 @@
+# Добавьте в таблицу покупателей 1000 новых записей, например, используя команду, формирующую последовательности:
+# insert into cust
+# values ( generate_series(1, 1000), 'test_name', 100, 'test_city' );
+# Проверьте, используется ли теперь созданный индекс при сортировке?
+
+INSERT INTO cust (cnum, name, rating, city)
+VALUES
+  (generate_series(1, 1000),
+   'test_name',
+   100,
+   'test_city');
