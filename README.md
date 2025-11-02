@@ -2,4 +2,5 @@
 Data Base class
 
 # Ready labs:
-1-5
+with def
+1-5, rgr

@@ -1,0 +1,46 @@
+# Вывести название, описание и теги книг, с издательством "Питер"
+select books.name, bi.description, bi.tags from books
+left join book_infos as bi
+on bi.book_id = books.id
+where books.publisher = 'Питер'
+
+# Вывести id пользователя и количество книг для пользователей, взявших больше одной книги
+select users.id, count(*) from users
+left join rentals on rentals.user_id = users.id
+group by users.id
+having count(*) > 1
+
+
+# Вывести дату возврата, паспортные данные, имя пользователей, задолжавших книгу
+select rentals.return_date, users.name, passports.* from passports
+left join users
+    on users.passport_id = passports.id
+left join rentals
+    on rentals.user_id = users.id
+where rentals.return_date < now()
+
+# Для каждого пользователя вывести название и описание книги которую он взял
+# или null, если он не брал книг
+select users.id, books.name, book_infos.description from users
+left join rentals
+    on rentals.user_id = users.id
+left join books
+    on books.id = rentals.book_id
+left join book_infos
+    on book_infos.book_id = books.id
+
+
+# Книги, которые сейчас больше чем у 4 людей
+create view popular_books AS
+select books.name from books
+where books.id in (
+    select rentals.book_id from rentals
+    group by rentals.book_id
+    having count(*) > 4
+)
+
+# Книги и вся информация о них
+create view books_with_information AS
+select * from books
+left join book_infos
+    on book_infos.book_id = books.id

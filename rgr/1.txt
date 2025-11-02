@@ -1,0 +1,85 @@
+create table passports
+(
+    id uuid not null primary key,
+    number bigint not null,
+    date timestamp(0) not null,
+    mvd varchar(128) not null
+);
+
+create table users
+(
+    id uuid not null primary key,
+    name varchar(128) not null,
+    passport_id uuid references passports(id)
+);
+
+create table books
+(
+    id uuid not null primary key,
+    name varchar(256) not null,
+    release_date timestamp(0) not null,
+    publisher varchar(128) not null,
+    release_city varchar(128) not null
+);
+
+create table book_infos
+(
+    book_id uuid references books(id) on delete cascade not null unique,
+    description text,
+);
+
+create table book_tags
+(
+    book_id uuid references books(id) on delete cascade not null,
+    tag varchar(64) not null
+);
+
+create table rentals
+(
+    user_id uuid references users(id) not null,
+    book_id uuid references books(id) not null,
+    lease_date timestamp(0) not null,
+    return_date timestamp(0) check (return_date > lease_date)
+);
+
+insert into passports (id, number, date, mvd) values
+    ('e9a10ac2-5357-42c0-b943-2d34b4dce34a', 1111111111, timestamp '2015-10-19', 'ГУ МВД ПО НОВОСИБИРСКОЙ ОБЛАСТИ 236-512'),
+    ('7f13d51b-7a97-467c-a36b-8a2e29a0bbbd', 2222222222, timestamp '2014-11-17', 'ГУ МВД ПО НОВОСИБИРСКОЙ ОБЛАСТИ 236-512'),
+    ('28fdd4a3-433b-43e4-a66a-fb57708af78f', 3333333333, timestamp '2016-09-20', 'ГУ МВД ПО НОВОСИБИРСКОЙ ОБЛАСТИ 236-512'),
+    ('0f640182-4ce3-49da-ace6-c9f79cdb1aaf', 4444444444, timestamp '2015-08-15', 'ГУ МВД ПО НОВОСИБИРСКОЙ ОБЛАСТИ 236-512'),
+    ('244a7f5e-c5e0-478f-ab24-636bae236b43', 5555555555, timestamp '2013-07-10', 'ГУ МВД ПО НОВОСИБИРСКОЙ ОБЛАСТИ 236-512'),
+    ('c8b0dec1-3921-4045-a709-ac412927149b', 6666666666, timestamp '2012-10-19', 'ГУ МВД ПО НОВОСИБИРСКОЙ ОБЛАСТИ 236-512'),
+    ('5de8e993-373f-47c1-81a2-c2912865f68f', 7777777777, timestamp '2014-02-01', 'ГУ МВД ПО НОВОСИБИРСКОЙ ОБЛАСТИ 236-512');
+
+insert into users (id, name, passport_id) values
+    ('c02df06d-2d97-40f0-b7b1-0c0f73ee7135', 'Nikita', 'e9a10ac2-5357-42c0-b943-2d34b4dce34a'),
+    ('0358781c-e49a-49ac-b667-49eaf823f511', 'Andrew', '7f13d51b-7a97-467c-a36b-8a2e29a0bbbd'),
+    ('692200d0-76d2-4911-b890-2bbe2f291e0e', 'Dmitriy', '28fdd4a3-433b-43e4-a66a-fb57708af78f'),
+    ('67129d60-a6f6-4bb1-9f2e-8dd7055d24bb', 'Stepan', '0f640182-4ce3-49da-ace6-c9f79cdb1aaf'),
+    ('7b6d9468-1d2e-4653-995b-be8272c44a50', 'Igor', '244a7f5e-c5e0-478f-ab24-636bae236b43'),
+    ('afaea820-effd-46cc-bf71-e33f18841933', 'Vlad', 'c8b0dec1-3921-4045-a709-ac412927149b'),
+    ('5189cccc-355f-4802-832b-4af17613620b', 'Stas', '5de8e993-373f-47c1-81a2-c2912865f68f');
+
+insert into books (id, name, release_date, publisher, release_city) values
+    ('e5bdb703-0c16-4ffd-aa7a-6e748c806425', 'Чистый код', timestamp '2025-10-01', 'Питер', 'Moscow'),
+    ('b93e1a7d-103f-4ca4-9dfb-a6061b2338c2', 'Правила дорожного движения', timestamp '2025-10-01', 'ГИБДД', 'Moscow'),
+    ('2a4fe419-0ee6-43e9-89fa-36287f017a59', 'Паттерны банды четырех', timestamp '2025-10-01', 'Питер', 'Novosibirsk');
+
+insert into book_infos (book_id, description) values
+    ('e5bdb703-0c16-4ffd-aa7a-6e748c806425', 'Заезженная книга про написание кода'),
+    ('b93e1a7d-103f-4ca4-9dfb-a6061b2338c2', 'Все правила дорожного движения 2024'),
+    ('2a4fe419-0ee6-43e9-89fa-36287f017a59', 'Книга про паттерны');
+
+insert into book_tags (book_id, tag) values
+    ('e5bdb703-0c16-4ffd-aa7a-6e748c806425', 'Популярная'),
+    ('e5bdb703-0c16-4ffd-aa7a-6e748c806425', 'Часто не возвращают'),
+    ('b93e1a7d-103f-4ca4-9dfb-a6061b2338c2', 'Устарела');
+
+insert into rentals (user_id, book_id, lease_date, return_date) values
+    ('c02df06d-2d97-40f0-b7b1-0c0f73ee7135', 'e5bdb703-0c16-4ffd-aa7a-6e748c806425', timestamp '2025-10-20', timestamp '2025-10-27'),
+    ('0358781c-e49a-49ac-b667-49eaf823f511', '2a4fe419-0ee6-43e9-89fa-36287f017a59', timestamp '2025-10-20', timestamp '2025-10-29'),
+    ('692200d0-76d2-4911-b890-2bbe2f291e0e', 'e5bdb703-0c16-4ffd-aa7a-6e748c806425', timestamp '2025-10-24', timestamp '2025-10-30'),
+    ('692200d0-76d2-4911-b890-2bbe2f291e0e', '2a4fe419-0ee6-43e9-89fa-36287f017a59', timestamp '2025-10-24', timestamp '2025-10-30'),
+    ('67129d60-a6f6-4bb1-9f2e-8dd7055d24bb', 'e5bdb703-0c16-4ffd-aa7a-6e748c806425', timestamp '2025-10-15', timestamp '2025-10-22'),
+    ('afaea820-effd-46cc-bf71-e33f18841933', 'e5bdb703-0c16-4ffd-aa7a-6e748c806425', timestamp '2025-10-25', timestamp '2025-11-01'),
+    ('5189cccc-355f-4802-832b-4af17613620b', 'e5bdb703-0c16-4ffd-aa7a-6e748c806425', timestamp '2025-10-20', timestamp '2025-10-27');

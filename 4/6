@@ -1,3 +1,11 @@
 Вывести продавцов, которые не продавали товары покупателям
 из своего города.
 
+select * from sal
+where sal.snum not in (
+    select ord.snum from ord
+    where ord.cnum in (
+        select cust.cnum from cust
+        where cust.city = sal.city
+    )
+)
