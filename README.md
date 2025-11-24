@@ -3,7 +3,6 @@ Data Base class
 
 # Ready labs:
 with def
-1-5, rgr
+1-6, rgr
 
 no def
-6
